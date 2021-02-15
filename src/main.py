@@ -16,7 +16,8 @@ formula8 = Implies(Not(And(Atom('p'), Atom('s'))), And(Atom('q'), Not(And(Atom('
 
 def main():
     # check_quantity_of_atoms()
-    check_quantity_of_connectives()
+    # check_quantity_of_connectives()
+    check_substitution()
 
 def check_quantity_of_atoms ():
     for formula in get_formulas():
@@ -29,6 +30,13 @@ def check_quantity_of_connectives ():
         print(f'Formula: { formula }')
         print(f'Quantity of connectives: { number_of_connectives(formula) }')
         print('--------------------------------------------')
+
+def check_substitution():
+    print(f'Formula: { formula7 }')
+    print(f'Old subformula: { formula5 }')
+    print(f'New subformula: { formula4 }')
+    substituted_formula = substitution(formula7, formula5, formula4)
+    print(f'Formula after substitution: { substituted_formula }')
 
 def get_formulas ():
     return [
