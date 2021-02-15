@@ -3,6 +3,7 @@
 
 from entities.formula import *
 from utils.functions import *
+from utils.semantics import *
 
 formula1 = Atom('p')  # p
 formula2 = Atom('q')  # q
@@ -11,13 +12,13 @@ formula4 = And(Atom('p'), Atom('s'))  # (p /\ s)
 formula5 = Not(And(Atom('p'), Atom('s')))  # (¬(p /\ s))
 formula6 = Or(Not(And(Atom('p'), Atom('s'))), Atom('q'))  # ((¬(p /\ s)) v q)
 formula7 = Implies(Not(And(Atom('p'), Atom('s'))), And(Atom('q'), Atom('r')))  # ((¬(p /\ s)) -> (q /\ r))
-formula8 = Implies(Not(And(Atom('p'), Atom('s'))), And(Atom('q'), Not(And(Atom('p'), Atom('s')))))
-# ((¬(p /\ s)) -> (q /\ (¬(p /\ s))))
+formula8 = Implies(Not(And(Atom('p'), Atom('s'))), And(Atom('q'), Not(And(Atom('p'), Atom('s'))))) # ((¬(p /\ s)) -> (q /\ (¬(p /\ s))))
 
 def main():
     # check_quantity_of_atoms()
     # check_quantity_of_connectives()
-    check_substitution()
+    # check_substitution()
+    check_truth_value()
 
 def check_quantity_of_atoms ():
     for formula in get_formulas():
@@ -31,12 +32,38 @@ def check_quantity_of_connectives ():
         print(f'Quantity of connectives: { number_of_connectives(formula) }')
         print('--------------------------------------------')
 
-def check_substitution():
+def check_substitution ():
     print(f'Formula: { formula7 }')
     print(f'Old subformula: { formula5 }')
     print(f'New subformula: { formula4 }')
     substituted_formula = substitution(formula7, formula5, formula4)
     print(f'Formula after substitution: { substituted_formula }')
+
+def check_truth_value ():
+    true_case_interpretation = {
+        Atom('q'): True
+    }
+    false_case_interpretation = {
+        Atom('p'): True,
+        Atom('s'): True,
+        Atom('q'): False
+    }
+
+    true_case = truth_value(formula6, true_case_interpretation)
+    false_case = truth_value(formula6, false_case_interpretation)
+
+    print(f'Formula: { formula6 }');
+
+    print(f'True interpretation case: ')
+    for key, value in true_case_interpretation.items():
+        print(f'{ key }: { value }')
+
+    print(f'False interpretation case: ')
+    for key, value in false_case_interpretation.items():
+        print(f'{ key }: { value }')
+
+    print('\nPassed in truth value check!') if true_case is True and false_case is False else print(
+        'Failed in truth value check!')
 
 def get_formulas ():
     return [
@@ -48,8 +75,6 @@ def show_formulas ():
     formulas = get_formulas()
     for i, formula in enumerate(formulas):
         print(f'formula{i+1}: {formula}')
-
-
     
     # print(formula1 == formula3)
     # print(formula1 == formula2)
