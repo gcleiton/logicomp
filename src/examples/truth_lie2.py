@@ -8,14 +8,15 @@ Essa situação é possível nas condições do puzzle?
 É possível dizer a categoria de Amy? Justifique."""
 
 
-from semantics import *
+from utils.semantics import *
 
-amy_honest = Atom('amy é honesta')
+def execute ():
+  amy_honest = Atom('amy é honesta')
 
-#  Amy diz que é mentirosa.
-#  Amy é honesta se e somente se o que ela diz é verdade
-formula = And(Implies(amy_honest, Not(amy_honest)),
-              Implies(Not(amy_honest), amy_honest))
+  #  Amy diz que é mentirosa.
+  #  Amy é honesta se e somente se o que ela diz é verdade
+  formula = And(Implies(amy_honest, Not(amy_honest)),
+                Implies(Not(amy_honest), amy_honest))
 
 
-print(is_satisfiable(formula))
+  print(is_satisfiable(formula))

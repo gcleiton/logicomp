@@ -2,7 +2,7 @@
 do some computation on its syntactic structure. """
 
 
-from formula import *
+from entities.formula import *
 
 
 def length(formula):

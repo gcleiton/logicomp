@@ -1,4 +1,4 @@
-from semantics import *
+from utils.semantics import *
 from typing import List
 from typing import Union
 
@@ -40,7 +40,6 @@ my_grid = [[-1, -1, -1, -1],
            [-1, 1, 1, 1],
            [-1, 1, 0, 0]]
 """
-
 my_grid = [[-1, -1, -1, -1],
            [-1, -1, -1, -1],
            [-1, 1, 1, 1],
@@ -52,6 +51,27 @@ my_grid = [[-1, -1, -1, -1],
 
 
 # there is no mine in squares with number different from -1:
+
+def execute():
+    # print(get_adjacent_cells(0, 0))
+    print('premises in no_mines(my_grid): ')
+    for premise in no_mines(my_grid):
+        print(premise)
+
+    print('premises in mines_neighborhood(my_grid) ')
+    for premise in mines_neighborhood(my_grid):
+        print(premise)
+
+
+    print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Atom('1_2')))
+    print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Not(Atom('1_2'))))
+    print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Atom('1_3')))
+    print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Not(Atom('1_3'))))
+    print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Atom('2_0')))
+    print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Not(Atom('2_0'))))
+    print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Atom('3_0')))
+    print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Not(Atom('3_0'))))
+    # ======== YOUR CODE HERE ========
 
 def no_mines(grid):
     premises = []
@@ -115,24 +135,3 @@ def at_least_one(i, j):  # -> List[Formula]
 def get_adjacent_cells(i, j):
     adjacent_cells = [(i + k, j + m) for k in [-1, 0, 1] for m in [-1, 0, 1] if 0 <= i + k <= 3 and 0 <= j + m <= 3]
     return adjacent_cells
-
-
-# print(get_adjacent_cells(0, 0))
-print('premises in no_mines(my_grid): ')
-for premise in no_mines(my_grid):
-    print(premise)
-
-print('premises in mines_neighborhood(my_grid) ')
-for premise in mines_neighborhood(my_grid):
-    print(premise)
-
-
-print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Atom('1_2')))
-print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Not(Atom('1_2'))))
-print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Atom('1_3')))
-print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Not(Atom('1_3'))))
-print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Atom('2_0')))
-print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Not(Atom('2_0'))))
-print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Atom('3_0')))
-print(is_logical_consequence(no_mines(my_grid) + mines_neighborhood(my_grid), Not(Atom('3_0'))))
-# ======== YOUR CODE HERE ========

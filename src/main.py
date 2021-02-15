@@ -1,9 +1,8 @@
 """You can test your functions in this module as in the following code: """
 
 
-from formula import *
-from functions import *
-
+from entities.formula import *
+from utils.functions import *
 
 formula1 = Atom('p')  # p
 formula2 = Atom('q')  # q
@@ -48,3 +47,4 @@ for subformula in subformulas(formula8):
 # for example, for formula8:
 print('number of subformulas of formula8:', len(subformulas(formula8)))
 print('len(subformulas(formula8)) <= length(formula8):', len(subformulas(formula8)) <= length(formula8))
+

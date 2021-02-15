@@ -1,4 +1,4 @@
-from semantics import *
+from utils.semantics import *
 import time
 
 '''
@@ -27,7 +27,13 @@ grid_test1_ solution = [[2, 1, 4, 3],
 # atom 1_1_1 denotes that cell (1,1) is filled with 1
 # atom 2_3_4 denotes that cell (2,3) is filled with 4
 
-
+def execute ():
+    start_time = time.time()
+    print('Solução do sudoku:')
+    sudoku_solution(grid_test1)
+    end_time = time.time()
+    print('Time:', end_time - start_time)
+    
 # auxiliary functions:
 
 def and_all(list_formulas):
@@ -200,8 +206,3 @@ def sudoku_solution(grid):
         print('Sudoku sem solução!')
 
 
-start_time = time.time()
-print('Solução do sudoku:')
-sudoku_solution(grid_test1)
-end_time = time.time()
-print('Time:', end_time - start_time)

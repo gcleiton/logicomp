@@ -1,8 +1,8 @@
 """The goal in this module is to define functions associated with the semantics of formulas in propositional logic. """
 
 
-from formula import *
-from functions import atoms
+from entities.formula import *
+from utils.functions import atoms
 
 
 def truth_value(formula, interpretation):
