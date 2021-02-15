@@ -15,12 +15,19 @@ formula8 = Implies(Not(And(Atom('p'), Atom('s'))), And(Atom('q'), Not(And(Atom('
 # ((¬(p /\ s)) -> (q /\ (¬(p /\ s))))
 
 def main():
-    check_quantity_of_atoms()
+    # check_quantity_of_atoms()
+    check_quantity_of_connectives()
 
 def check_quantity_of_atoms ():
     for formula in get_formulas():
         print(f'Formula: { formula }')
         print(f'Quantity of atoms: { number_of_atoms(formula) }')
+        print('--------------------------------------------')
+
+def check_quantity_of_connectives ():
+    for formula in get_formulas():
+        print(f'Formula: { formula }')
+        print(f'Quantity of connectives: { number_of_connectives(formula) }')
         print('--------------------------------------------')
 
 def get_formulas ():

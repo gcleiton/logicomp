@@ -77,8 +77,12 @@ def number_of_atoms(formula):
 
 def number_of_connectives(formula):
     """Returns the number of connectives occurring in a formula."""
-    pass
-    # ======== YOUR CODE HERE ========
+    if isinstance(formula, Atom):
+        return 0
+    if isinstance(formula, Not):
+        return number_of_connectives(formula.inner) + 1
+    if isinstance(formula, Implies) or isinstance(formula, And) or isinstance(formula, Or):
+        return number_of_connectives(formula.left) + number_of_connectives(formula.right) + 1
 
 
 def substitution(formula, old_subformula, new_subformula):
