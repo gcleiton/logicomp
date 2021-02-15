@@ -4,6 +4,7 @@
 from entities.formula import *
 from utils.functions import *
 from utils.semantics import *
+from utils.common import *
 
 formula1 = Atom('p')  # p
 formula2 = Atom('q')  # q
@@ -13,24 +14,26 @@ formula5 = Not(And(Atom('p'), Atom('s')))  # (¬(p /\ s))
 formula6 = Or(Not(And(Atom('p'), Atom('s'))), Atom('q'))  # ((¬(p /\ s)) v q)
 formula7 = Implies(Not(And(Atom('p'), Atom('s'))), And(Atom('q'), Atom('r')))  # ((¬(p /\ s)) -> (q /\ r))
 formula8 = Implies(Not(And(Atom('p'), Atom('s'))), And(Atom('q'), Not(And(Atom('p'), Atom('s'))))) # ((¬(p /\ s)) -> (q /\ (¬(p /\ s))))
+formula9 = And(formula1, Not(formula1))
 
 def main():
     # check_quantity_of_atoms()
     # check_quantity_of_connectives()
     # check_substitution()
-    check_truth_value()
+    # check_truth_value()
+    check_is_satisfiable()
 
 def check_quantity_of_atoms ():
     for formula in get_formulas():
         print(f'Formula: { formula }')
         print(f'Quantity of atoms: { number_of_atoms(formula) }')
-        print('--------------------------------------------')
+        print_divider()
 
 def check_quantity_of_connectives ():
     for formula in get_formulas():
         print(f'Formula: { formula }')
         print(f'Quantity of connectives: { number_of_connectives(formula) }')
-        print('--------------------------------------------')
+        print_divider()
 
 def check_substitution ():
     print(f'Formula: { formula7 }')
@@ -64,6 +67,20 @@ def check_truth_value ():
 
     print('\nPassed in truth value check!') if true_case is True and false_case is False else print(
         'Failed in truth value check!')
+
+def check_is_satisfiable ():
+    satisfiable = is_satisfiable(formula5)
+    not_satisfiable = is_satisfiable(formula9)
+
+    print(f'Satisfiable formula: { formula8 }');
+    for key, value in satisfiable.items():
+        print(f'{ key }: { value }')
+    print_divider()
+    print(f'Not satisfiable formula: { formula6 }');
+
+    print('\nPassed in satisfiability check!') if satisfiable and not_satisfiable is False else print(
+        'Failed in truth value check!')
+
 
 def get_formulas ():
     return [
